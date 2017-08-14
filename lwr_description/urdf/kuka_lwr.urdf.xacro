@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<robot name="kuka_lwr" xmlns:xacro="http://www.ros.org/wiki/xacro">
+	
+	<!-- materials -->
+	<xacro:include filename="$(find lwr_description)/urdf/kuka_materials.xacro"/>
+	
+	<!-- load URDF -->
+	<xacro:include filename="$(find lwr_description)/urdf/kuka_lwr.xacro"/>
+
+	<!-- gazebo and transmission models /-->
+	<xacro:include filename="$(find lwr_description)/gazebo/kuka_lwr.gazebo.xacro"/>
+
+	<!-- transmission -->
+	<xacro:include filename="$(find lwr_description)/urdf/kuka_lwr.transmission.xacro"/>
+	
+	<!-- utils /-->
+	<xacro:include filename="$(find lwr_description)/urdf/utils.xacro"/>
+
+	<xacro:property name="M_PI" value="3.1415926535897931" />
+
+
+	<xacro:arg name="name" default="lwr"/>
+	<xacro:arg name="origin_xyz" default="0 0 0"/>
+  	<xacro:arg name="origin_rpy" default="0 0 0"/>
+
+<xacro:kuka_lwr_gazebo name="$(arg name)"/>
+<xacro:kuka_lwr_transmission name="$(arg name)"/>
+
+
+<!-- Fix to world just for testing -->
+<link name="world"/>
+
+
+ <!--lwr-->
+<xacro:kuka_lwr name="$(arg name)" parent="world">  <origin xyz="$(arg origin_xyz)" rpy="$(arg origin_rpy)" />
+</xacro:kuka_lwr>
+
+
+
+
+</robot>

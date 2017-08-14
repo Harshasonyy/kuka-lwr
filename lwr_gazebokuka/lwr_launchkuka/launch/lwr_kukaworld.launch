@@ -1,0 +1,32 @@
+<launch>
+
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find lwr_robotworld)/worlds/empty.world"/>
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+  </include>
+
+  <include file="$(find lwr_description)/launch/kukalwr_display.launch">
+   
+  </include>
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description"
+    command="$(find xacro)/xacro --inorder '$(find lwr_description)/urdf/kuka_lwr.urdf.xacro'" />
+    
+  <include file="$(find lwr_controllers)/config/controllers_utils.launch"/>
+  
+  <rosparam file="$(find lwr_controllers)/config/lwr_controllers.yaml" command="load"/>
+  
+  <node name="lwr_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn lwr_controller" respawn="false" output="screen"/>
+
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    args="-urdf -model lwr -param robot_description"/>
+</launch>

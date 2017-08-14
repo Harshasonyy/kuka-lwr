@@ -1,0 +1,15 @@
+lwr_controller:
+  type: position_controllers/JointTrajectoryController
+  joints: 
+      - lwr_a1_joint
+      - lwr_a2_joint
+      - lwr_e1_joint
+      - lwr_a3_joint
+      - lwr_a4_joint
+      - lwr_a5_joint
+      - lwr_a6_joint
+  constraints:
+      goal_time: 0.6
+      stopped_velocity_tolerance: 0.05
+      state_publish_rate:  25
+      action_monitor_rate: 10

@@ -2,9 +2,8 @@
   <name>lwr_gazebokuka</name>
   <version>0.1.0</version>
   <description>The lwr_gazebokuka package</description>
-
-  <maintainer email="marco.esposito@tum.de">Marco Esposito</maintainer>
-  <maintainer email="cjrosales@gmail.com">Carlos J. Rosales</maintainer>
+  
+  <maintainer email="harshasonyy@gmail.com">Harsha Nagaraja</maintainer>
 
   <license>BSD</license>
 

@@ -1,12 +1,13 @@
 <launch>
 	
 	<arg name="controller" default="joint_state_controller lwr_joint_trajectory_controller" />
+	<arg name="stopped_controllers" default="OneTaskInverseKinematics" />
 
 	<!-- Load joint controller configurations from YAML file to parameter server -->
 	<rosparam file="$(find lwr_controllers)/config/controllers.yaml" command="load"/>
 	
 	<node ns="lwr" name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"  args="joint_state_controller $(arg controller)"/> 
 	
-	<node ns="lwr" name="controller_spawner_stopped" pkg="controller_manager" type="spawner" respawn="false" output="screen"  "/> 
+	<node ns="lwr" name="controller_spawner_stopped" pkg="controller_manager" type="spawner" respawn="false" output="screen"  args="--stopped $(arg stopped_controllers)"/> 
 	
 </launch>

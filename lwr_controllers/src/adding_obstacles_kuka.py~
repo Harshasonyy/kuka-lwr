@@ -41,7 +41,7 @@ class MoveItDemo:
         # Set the reference frame for pose targets
         reference_frame = 'lwr_base_link'
         
-        # Set the lwr_kuka4plus reference frame accordingly
+        # Set the full_lwr reference frame accordingly
         lwr_kuka4plus.set_pose_reference_frame(reference_frame)
         
         # Allow 5 seconds per planning attempt
